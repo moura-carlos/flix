@@ -6,6 +6,10 @@
       </strong>
       (<%= movie.rating %>):
       <%= number_to_currency(movie.total_gross, precision: 0) %>
+      <p>
+        <%= movie.description %>
+      </p>
+      <%= movie.released_on %>
     </li>
   <% end %>
 </ul>
