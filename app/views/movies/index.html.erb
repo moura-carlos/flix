@@ -1,19 +1,16 @@
-<ul>
-  <% @movies.each do |movie| %>
-    <li>
-      <strong>
+<% @movies.each do |movie| %>
+  <section class="movie">
+    <div class="summary">
+      <h2>
         <%= movie.title %>
-      </strong>
-      (<%= movie.rating %>):
-      <%= total_gross(movie) %>
+      </h2>
+      <h3>
+        <%= total_gross(movie) %>
+      </h3>
       <p>
-        <%= truncate(movie.description, length: 40, separator: " ") %>
+        <%= truncate(movie.description, length: 150, separator: ' ') %>
       </p>
-      <%= movie.released_on.to_datetime.strftime("%m/%d/%Y") %>
-      <p>
-        The movie was released in <%= year_of(movie) %>
-      </p>
+    </div>
+  </section>
+<% end %>
 
-    </li>
-  <% end %>
-</ul>
