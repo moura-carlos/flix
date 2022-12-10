@@ -5,11 +5,15 @@
         <%= movie.title %>
       </strong>
       (<%= movie.rating %>):
-      <%= number_to_currency(movie.total_gross, precision: 0) %>
+      <%= total_gross(movie) %>
       <p>
-        <%= movie.description %>
+        <%= truncate(movie.description, length: 40, separator: " ") %>
       </p>
-      <%= movie.released_on %>
+      <%= movie.released_on.to_datetime.strftime("%m/%d/%Y") %>
+      <p>
+        The movie was released in <%= year_of(movie) %>
+      </p>
+
     </li>
   <% end %>
 </ul>
