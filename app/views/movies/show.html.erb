@@ -17,6 +17,9 @@
         <td>
           <%= total_gross(@movie) %>
         </td>
+        <td>
+          <%= link_to "Edit Movie", edit_movie_path(movie: @movie) %>
+        </td>
       </tr>
     </table>
   </div>
