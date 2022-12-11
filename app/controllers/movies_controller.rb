@@ -1,18 +1,15 @@
 class MoviesController < ApplicationController
+  before_action :find_movie, only: [:show, :edit, :update]
   def index
     @movies = Movie.all
   end
 
-  def show
-    @movie = Movie.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @movie = Movie.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @movie = Movie.find(params[:id])
+    # @movie = Movie.find(params[:id])
     if @movie.update(movie_params)
       redirect_to @movie, status: :see_other
     else
@@ -33,8 +30,12 @@ class MoviesController < ApplicationController
     end
   end
 
+
   private
   def movie_params
     params.require(:movie).permit(:title, :rating, :total_gross, :description, :released_on)
+  end
+  def find_movie
+    @movie = Movie.find(params[:id])
   end
 end
