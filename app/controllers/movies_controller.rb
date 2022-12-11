@@ -32,10 +32,11 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+    # redirect_to movies_url, status: :see_other, danger: "I can't do that!"
     if @movie.destroy
       redirect_to movies_url, status: :see_other, alert: "Movie successfully deleted!"
     else
-      render :show
+      render :show, danger: "Something went wrong! Please, try again."
     end
   end
 
