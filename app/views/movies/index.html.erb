@@ -11,6 +11,7 @@
       <p>
         <%= truncate(movie.description, length: 150, separator: ' ') %>
       </p>
+      <strong>Released in <%= year_of(movie) %></strong>
     </div>
   </section>
 <% end %>

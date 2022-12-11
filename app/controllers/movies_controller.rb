@@ -1,7 +1,8 @@
 class MoviesController < ApplicationController
   before_action :find_movie, only: [:show, :edit, :update, :destroy]
   def index
-    @movies = Movie.all
+    # select movies that have been released and order from newest released to oldest
+    @movies = Movie.released
   end
 
   def show; end
