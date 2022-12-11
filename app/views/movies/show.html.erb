@@ -1,4 +1,7 @@
 <section class="movie-details">
+  <div class="image">
+    <%= image_tag(@movie.image_file_name) %>
+  </div>
   <div class="details">
     <h1>
       <%= @movie.title %>
@@ -12,14 +15,29 @@
     <table>
       <tr>
         <th>
+          Director
+        </th>
+        <td><%= @movie.director %></td>
+      </tr>
+      <tr>
+        <th>
+          Duration
+        </th>
+        <td><%= @movie.duration %></td>
+      </tr>
+      <tr>
+        <th>
           Total Gross:
         </th>
         <td>
           <%= total_gross(@movie) %>
         </td>
+      </tr>
+      <tr>
         <td>
           <%= link_to "Edit Movie", edit_movie_path(@movie) %>
         </td>
+        <td>
           <%= link_to "Delete Movie", movie_path(@movie), data: { turbo_method: "delete", turbo_confirm: "Are you sure?"}, class: "button" %>
         </td>
       </tr>
