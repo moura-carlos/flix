@@ -1,20 +1,4 @@
 <div class="container">
-  <%= form_with(model: @movie) do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-
-    <%= f.label :description %>
-    <%= f.text_area :description, rows: 7 %>
-
-    <%= f.label :rating %>
-    <%= f.text_field :rating %>
-
-    <%= f.label :total_gross %>
-    <%= f.number_field :total_gross %>
-
-    <%= f.label :released_on %>
-    <%= f.date_select :released_on, {}, { class: "date" } %>
-
-    <%= f.submit %>
-  <% end %>
+  <h1>Editing movie "<%= @movie.title %>"</h1>
+  <%= render "form", movie: @movie %>
 </div>
