@@ -17,5 +17,10 @@ Rails.application.routes.draw do
 
   post '/movies' => 'movies#create', as: 'create_movie'
 =end
-  resources :movies
+  resources :movies do
+    resources :reviews
+  end
+
+  # movies/:movie_id/reviews -> reviews#index
+  #
 end
