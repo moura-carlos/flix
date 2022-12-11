@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :find_movie, only: [:show, :edit, :update]
+  before_action :find_movie, only: [:show, :edit, :update, :destroy]
   def index
     @movies = Movie.all
   end
@@ -30,6 +30,13 @@ class MoviesController < ApplicationController
     end
   end
 
+  def destroy
+    if @movie.destroy
+      redirect_to root_url, status: :see_other, notice: "Movie successfully deleted!"
+    else
+      render :show
+    end
+  end
 
   private
   def movie_params

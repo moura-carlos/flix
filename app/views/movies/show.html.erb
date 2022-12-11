@@ -20,6 +20,8 @@
         <td>
           <%= link_to "Edit Movie", edit_movie_path(@movie) %>
         </td>
+          <%= link_to "Delete Movie", movie_path(@movie), data: { turbo_method: "delete", turbo_confirm: "Are you sure?"}, class: "button" %>
+        </td>
       </tr>
     </table>
   </div>
