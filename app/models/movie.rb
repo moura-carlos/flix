@@ -13,12 +13,27 @@ class Movie < ApplicationRecord
   validates :rating, inclusion: { in: RATINGS }
 
   def flop?
-    total_gross.blank? || total_gross < 225_000_000
+    (self.reviews.size < 50 && self.average_stars < 4.0) &&
+      (total_gross.blank? || total_gross < 225_000_000)
+    # taking into consideration cult classic movies
+    # movie.reviews.size > 50 && movie.average_stars >= 4.0
+    # then the movie shouldn't be a flop regardless of the total gross
   end
 
   def self.released
     # select movies that have been released and order from newest released to oldest
     where("released_on < ?", Time.now).order("released_on desc")
+  end
+
+  # getting the average number of stars for the reviews given to a movie
+  def average_stars
+    # movie.reviews.average(:stars).to_s
+    # if movie does not have any reviews return 0.0 as the average
+    reviews.average(:stars) || 0.0
+  end
+
+  def average_stars_as_percent
+    (self.average_stars / 5.0) * 100
   end
 
 end
