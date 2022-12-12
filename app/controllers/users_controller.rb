@@ -37,6 +37,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
+      session[:user_id] = nil
       redirect_to movies_url, status: :see_other, alert: "Your account was successfully deleted!"
     else
       render :show, danger: "Oops, something went wrong. Please, try again!"
