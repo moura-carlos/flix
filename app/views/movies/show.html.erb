@@ -38,14 +38,16 @@
           <%= total_gross(@movie) %>
         </td>
       </tr>
-      <tr>
-        <td>
-          <%= link_to "Edit Movie", edit_movie_path(@movie) %>
-        </td>
-        <td>
-          <%= link_to "Delete Movie", movie_path(@movie), data: { turbo_method: "delete", turbo_confirm: "Are you sure?"}, class: "button" %>
-        </td>
-      </tr>
+      <% if current_user_admin? %>
+        <tr>
+          <td>
+            <%= link_to "Edit Movie", edit_movie_path(@movie) %>
+          </td>
+          <td>
+            <%= link_to "Delete Movie", movie_path(@movie), data: { turbo_method: "delete", turbo_confirm: "Are you sure?"}, class: "button" %>
+          </td>
+        </tr>
+      <% end %>
     </table>
     <h3>Write a review for <strong><%= @movie.title %></strong></h3>
     <%= render "reviews/form", movie: @movie, review: @movie.reviews.new %>

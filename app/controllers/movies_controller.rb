@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_action :require_sign_in, except: [:index, :show]
+  before_action :require_admin, except: [:index, :show]
   before_action :find_movie, only: [:show, :edit, :update, :destroy]
   def index
     # select movies that have been released and order from newest released to oldest
