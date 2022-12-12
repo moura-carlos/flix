@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  resource :session, only: [:new, :create, :destroy]
+  get 'signin' => 'sessions#new'
+
   # Route to:
   # Display reviews for a given movie:
   # movies/:movie_id/reviews -> reviews#index
