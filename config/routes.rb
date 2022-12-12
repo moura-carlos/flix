@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  # Route to:
+  # Display reviews for a given movie:
   # movies/:movie_id/reviews -> reviews#index
+  # Allow users to write reviews
+  # movies/:movie_id/reviews/new
   #
 end

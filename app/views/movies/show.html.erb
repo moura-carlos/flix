@@ -45,5 +45,8 @@
         </td>
       </tr>
     </table>
+    <h3>Write a review for <strong><%= @movie.title %></strong></h3>
+    <%= render "reviews/form", movie: @movie, review: @movie.reviews.new %>
   </div>
+  <%#= link_to "Write Review", new_movie_review_path(@movie), class: "review" %>
 </section>
