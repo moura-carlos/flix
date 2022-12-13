@@ -21,8 +21,10 @@ Rails.application.routes.draw do
 =end
   resources :movies do
     resources :reviews
+    resources :favorites, only: [:create, :destroy]
   end
-
+  # path to allow user to "favorite" a movie
+  # movies/:movie_id/favorites/new
   resource :session, only: [:new, :create, :destroy]
   get 'signin' => 'sessions#new'
 

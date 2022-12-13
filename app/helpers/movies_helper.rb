@@ -9,6 +9,13 @@ module MoviesHelper
   def year_of(movie)
     movie.released_on.strftime("%Y")
   end
+  def fave_unfave(movie, user)
+    if movie.fans.include?(user)
+      # display unfave button
+    else
+      # display fave button
+    end
+  end
 =begin
   def average_stars(movie)
     if movie.average_stars.zero?

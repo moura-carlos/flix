@@ -7,7 +7,12 @@ class MoviesController < ApplicationController
     @movies = Movie.released
   end
 
-  def show; end
+  def show
+    @fans = @movie.fans
+    if current_user
+      @favorite = current_user.favorites.find_by(movie_id: @movie.id)
+    end
+  end
 
   def edit; end
 
