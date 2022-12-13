@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
+  before_action :require_sign_in
   before_action :set_movie
+
   def index
     @reviews = @movie.reviews
   end
@@ -8,6 +10,7 @@ class ReviewsController < ApplicationController
   end
   def create
     @review = @movie.reviews.new(review_params)
+    @review.user = current_user
     if @review.save
       redirect_to movie_reviews_path(@movie), status: :see_other, notice: "Thanks for your review!"
     else
@@ -16,7 +19,7 @@ class ReviewsController < ApplicationController
   end
   def destroy
     @review = @movie.reviews.find(params[:id])
-    if @review.destroy
+    if @review.user == current_user && @review.destroy
       redirect_to movie_reviews_url, status: :see_other, alert: "Review successfully deleted!"
     else
       render :index, danger: "Something went wrong. Please, try again!"
@@ -27,7 +30,7 @@ class ReviewsController < ApplicationController
   end
   def update
     @review = @movie.reviews.find(params[:id])
-    if @review.update(review_params)
+    if @review.user == current_user && @review.update(review_params)
       redirect_to movie_reviews_path(@movie), status: :see_other, notice: "Review successfully updated!"
     else
       render :edit, status: :unprocessable_entity
@@ -35,7 +38,7 @@ class ReviewsController < ApplicationController
   end
   private
   def review_params
-    params.require(:review).permit(:name, :stars, :comment)
+    params.require(:review).permit(:stars, :comment)
   end
   def set_movie
     @movie = Movie.find(params[:movie_id])
