@@ -12,4 +12,26 @@
         <%= link_to "Delete Account", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to permanently delete your account?" }, class: "button delete" %>
     </div>
   <% end %>
+  <% if @reviews.present? %>
+    <h3>Reviews</h3>
+    <% @reviews.each do |review| %>
+      <div class="review">
+        <div class="details">
+          <%= profile_image(review.user, size=35) %>
+          <%= review.user.name if review.user.username.present? %>
+        <span class="title">
+          <%= link_to review.movie.title, review.movie %>
+        </span>
+          <%= pluralize(review.stars, 'star') %>
+          <span class="date">
+            <%= time_ago_in_words(review.created_at) %> ago.
+          </span>
+          <p>
+            <%= review.comment %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </section>
+

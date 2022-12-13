@@ -5,7 +5,8 @@
       <%#= pluralize(review.stars, "star") %>
       <%= render "shared/stars", percent: review.stars_as_percent %>
       <p>
-        <%= review.name %>
+        <%= profile_image(review.user, size=35) %>
+        <%= link_to review.user.name, review.user if review.user.username.present? %>
         <span class="date">
           <%= time_ago_in_words(review.created_at) %> ago
         </span>
@@ -14,9 +15,10 @@
         <%= review.comment %>
       </p>
       <p>
-        <%= link_to "Edit review", edit_movie_review_path(@movie, review), class: "btn btn-outline-primary btn-sm" %>
-        <%= link_to "Delete review", movie_review_path(@movie, review), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "button" %>
-
+        <% if review.user == current_user %>
+          <%= link_to "Edit review", edit_movie_review_path(@movie, review), class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to "Delete review", movie_review_path(@movie, review), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "button" %>
+        <% end %>
       </p>
     </li>
   <% end %>
