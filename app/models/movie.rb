@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
-  has_many :reviews, dependent: :destroy
+  # has_many :reviews, dependent: :destroy
+  has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :characterizations, dependent: :destroy
   has_many :fans, through: :favorites, source: :user
@@ -16,6 +17,15 @@ class Movie < ApplicationRecord
   }
   validates :rating, inclusion: { in: RATINGS }
 
+  scope :released, -> { where("released_on < ?", Time.now).order("released_on desc") }
+  scope :upcoming, -> { where("released_on > ?", Time.now).order("released_on asc") }
+  scope :recent, -> (max = 5) { released.limit(max) } # returns an arbitrary number of released movies, by default returs 5
+  scope :flops, -> { released.where("total_gross < 22500000").order(total_gross: :asc) }
+  scope :hits, -> { released.where("total_gross   >= 300000000").order("total_gross desc") }
+  scope :by_name, -> { order(:name) }
+  scope :not_admins, -> { by_name.where(admin: false) }
+  scope :grossed_less_than, -> (amount) { released.where("total_gross < ?", amount) }
+  scope :grossed_greater_than, -> (amount) { released.where("total_gross > ?", amount) }
   def flop?
     (self.reviews.size < 50 && self.average_stars < 4.0) &&
       (total_gross.blank? || total_gross < 225_000_000)
@@ -24,10 +34,19 @@ class Movie < ApplicationRecord
     # then the movie shouldn't be a flop regardless of the total gross
   end
 
+=begin
   def self.released
     # select movies that have been released and order from newest released to oldest
     where("released_on < ?", Time.now).order("released_on desc")
   end
+=end
+
+  # upcoming -> all the movies that have not yet been released, ordered with the soonest first.
+=begin
+  def self.upcoming
+    where("release_on > ?", Time.now).order("released_on asc")
+  end
+=end
 
   # getting the average number of stars for the reviews given to a movie
   def average_stars

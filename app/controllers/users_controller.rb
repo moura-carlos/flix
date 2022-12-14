@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   before_action :require_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all
+    # @users = User.all
+    # querying only for the non-admin users
+    @users = User.not_admins
   end
 
   def show

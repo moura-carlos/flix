@@ -3,8 +3,23 @@ class MoviesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
   before_action :find_movie, only: [:show, :edit, :update, :destroy]
   def index
-    # select movies that have been released and order from newest released to oldest
-    @movies = Movie.released
+    # instead of using case when we can use the Object.send("Object_method_to_be_invoked")
+=begin
+      case params[:filter]
+      when "upcoming"
+        @movies = Movie.upcoming
+      when "recent"
+        @movies = Movie.recent
+      when "hits"
+        @movies = Movie.hits
+      when "flops"
+        @movies = Movie.flops
+      else
+        # select movies that have been released and order from newest released to oldest
+        @movies = Movie.released
+      end
+=end
+    @movies = Movie.send(movies_filter)
   end
 
   def show
@@ -54,5 +69,12 @@ class MoviesController < ApplicationController
   end
   def find_movie
     @movie = Movie.find(params[:id])
+  end
+  def movies_filter
+    if params[:filter].in? %w(upcoming recent hits flops)
+      params[:filter]
+    else
+      :released
+    end
   end
 end
