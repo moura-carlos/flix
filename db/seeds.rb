@@ -17,7 +17,8 @@ Movie.create!([
     }.squish,
     released_on: "2019-04-26",
     rating: 'PG-13',
-    total_gross: 1_223_641_414
+    total_gross: 1_223_641_414,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Captain Marvel',
@@ -27,7 +28,8 @@ Movie.create!([
     }.squish,
     released_on: "2019-03-08",
     rating: 'PG-13',
-    total_gross: 1_110_662_849
+    total_gross: 1_110_662_849,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Black Panther',
@@ -37,7 +39,8 @@ Movie.create!([
     }.squish,
     released_on: "2018-02-16",
     rating: 'PG-13',
-    total_gross: 1_346_913_161
+    total_gross: 1_346_913_161,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Avengers: Infinity War',
@@ -47,7 +50,8 @@ Movie.create!([
     }.squish,
     released_on: "2018-04-27",
     rating: 'PG-13',
-    total_gross: 2_048_359_754
+    total_gross: 2_048_359_754,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Green Lantern',
@@ -57,7 +61,8 @@ Movie.create!([
     }.squish,
     released_on: "2011-06-17",
     rating: 'PG-13',
-    total_gross: 219_851_172
+    total_gross: 219_851_172,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Fantastic Four',
@@ -67,7 +72,8 @@ Movie.create!([
     }.squish,
     released_on: "2015-08-07",
     rating: 'PG-13',
-    total_gross: 168_257_860
+    total_gross: 168_257_860,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Iron Man',
@@ -79,7 +85,8 @@ Movie.create!([
     }.squish,
     released_on: "2008-05-02",
     rating: 'PG-13',
-    total_gross: 585_366_247
+    total_gross: 585_366_247,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Superman',
@@ -91,7 +98,8 @@ Movie.create!([
     }.squish,
     released_on: "1978-12-15",
     rating: 'PG',
-    total_gross: 300_451_603
+    total_gross: 300_451_603,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Spider-Man',
@@ -104,7 +112,8 @@ Movie.create!([
     }.squish,
     released_on: "2002-05-03",
     rating: 'PG-13',
-    total_gross: 825_025_036
+    total_gross: 825_025_036,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: 'Batman',
@@ -115,7 +124,8 @@ Movie.create!([
     }.squish,
     released_on: "1989-06-23",
     rating: 'PG-13',
-    total_gross: 411_348_924
+    total_gross: 411_348_924,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: "Catwoman",
@@ -125,7 +135,8 @@ Movie.create!([
     }.squish,
     released_on: "2004-07-23",
     rating: "PG-13",
-    total_gross: 82_102_379
+    total_gross: 82_102_379,
+    duration: (1..150).to_a.sample(1)[0]
   },
   {
     title: "Wonder Woman",
@@ -135,7 +146,8 @@ Movie.create!([
     }.squish,
     released_on: "2017-06-02",
     rating: "PG-13",
-    total_gross: 821_847_012
+    total_gross: 821_847_012,
+    duration: (1..150).to_a.sample(1)[0]
   }
 ])
 
