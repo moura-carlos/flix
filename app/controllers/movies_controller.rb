@@ -68,7 +68,7 @@ class MoviesController < ApplicationController
     params.require(:movie).permit(:title, :rating, :total_gross, :description, :released_on, :director, :duration, :image_file_name, genre_ids: [])
   end
   def find_movie
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by!(slug: params[:id])
   end
   def movies_filter
     if params[:filter].in? %w(upcoming recent hits flops)

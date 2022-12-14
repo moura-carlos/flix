@@ -1,4 +1,5 @@
 class Movie < ApplicationRecord
+  before_save :set_slug
   # has_many :reviews, dependent: :destroy
   has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -9,6 +10,7 @@ class Movie < ApplicationRecord
   RATINGS = %w(G PG PG-13 R NC-17)
 
   validates :title, :released_on, :duration, presence: true
+  validates :title, uniqueness: true
   validates :description, length: { minimum: 25 }
   validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
   validates :image_file_name, format: {
@@ -22,8 +24,6 @@ class Movie < ApplicationRecord
   scope :recent, -> (max = 5) { released.limit(max) } # returns an arbitrary number of released movies, by default returs 5
   scope :flops, -> { released.where("total_gross < 22500000").order(total_gross: :asc) }
   scope :hits, -> { released.where("total_gross   >= 300000000").order("total_gross desc") }
-  scope :by_name, -> { order(:name) }
-  scope :not_admins, -> { by_name.where(admin: false) }
   scope :grossed_less_than, -> (amount) { released.where("total_gross < ?", amount) }
   scope :grossed_greater_than, -> (amount) { released.where("total_gross > ?", amount) }
   def flop?
@@ -58,5 +58,15 @@ class Movie < ApplicationRecord
   def average_stars_as_percent
     (self.average_stars / 5.0) * 100
   end
+
+  def to_param
+    slug
+  end
+
+  private
+  def set_slug
+    self.slug = title.parameterize
+  end
+  # overriding the default value returned by the to_param method
 
 end
