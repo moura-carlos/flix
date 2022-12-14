@@ -4,7 +4,15 @@ class GenresController < ApplicationController
   before_action :set_genre, except: [:index, :new, :create]
 
   def index
-    @genres = Genre.all.order(:name)
+    #@genres = Genre.all.order(:name)
+    # selecting only genres that have at least one movie associated with them.
+    # get only the genres that have at least one movie associated with it.
+    @genre_ids = Characterization.get_genre_ids
+    if current_user_admin?
+      @genres = Genre.all
+    else
+      @genres = Genre.where(id: @genre_ids)
+    end
   end
 
   def new

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   # movies/:movie_id/favorites/new
   resource :session, only: [:new, :create, :destroy]
   get 'signin' => 'sessions#new'
+  get 'movies/filter/:filter' => 'movies#index', as: :filtered_movies
   # Route to:
   # Display reviews for a given movie:
   # movies/:movie_id/reviews -> reviews#index

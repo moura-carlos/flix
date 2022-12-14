@@ -2,10 +2,23 @@
   <h1>List of Genres</h1>
   <ul>
     <% @genres.each do |genre| %>
-      <li>
-        <%#= link_to genre.name, edit_genre_path(genre) %>
-        <%= link_to genre.name, genre %>
-      </li>
+      <% if current_user_admin? %>
+        <% if @genre_ids.include?(genre.id) == false %>
+          <li>
+            <%= link_to genre.name, genre %> [NO MOVIE]
+          </li>
+        <% else %>
+          <li>
+            <%#= link_to genre.name, edit_genre_path(genre) %>
+            <%= link_to genre.name, genre %>
+          </li>
+        <% end %>
+      <% else %>
+        <li>
+          <%#= link_to genre.name, edit_genre_path(genre) %>
+          <%= link_to genre.name, genre %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>
