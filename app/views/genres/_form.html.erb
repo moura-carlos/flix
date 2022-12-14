@@ -1,0 +1,10 @@
+<%= form_with(model: genre) do |f| %>
+  <%= render "shared/errors", object: genre %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+  <%= link_to "Delete Genre", genre_path(genre), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-md", style: "display: block; margin-top: 2rem; width: 100% !important;" unless genre.id.nil? %>
+<% end %>
+<div style="display: block; margin-top: 2rem; width: 100% !important;">
+</div>
