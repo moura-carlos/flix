@@ -1,0 +1,12 @@
+<% if @genres.present? %>
+  <h1>List of Genres</h1>
+  <ul>
+    <% @genres.each do |genre| %>
+      <li>
+        <%#= link_to genre.name, edit_genre_path(genre) %>
+        <%= link_to genre.name, genre %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<%#= link_to "New Genre", new_genre_path, class: "btn btn-success btn-sm" %>

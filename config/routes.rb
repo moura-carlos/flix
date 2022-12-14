@@ -1,5 +1,6 @@
 
 Rails.application.routes.draw do
+  resources :genres
   resources :users
   get "signup" => "users#new"
   resources :reviews
@@ -27,7 +28,6 @@ Rails.application.routes.draw do
   # movies/:movie_id/favorites/new
   resource :session, only: [:new, :create, :destroy]
   get 'signin' => 'sessions#new'
-
   # Route to:
   # Display reviews for a given movie:
   # movies/:movie_id/reviews -> reviews#index
