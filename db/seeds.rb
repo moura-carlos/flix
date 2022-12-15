@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
 
 Movie.create!([
   {
@@ -161,3 +162,43 @@ Genre.create(name: "Documentary")
 Genre.create(name: "Adventure")
 Genre.create(name: "Animation")
 Genre.create(name: "Sci-Fi")
+[
+  ["Avengers: Endgame", "avengers-end-game.png"],
+  ["Captain Marvel", "captain-marvel.png"],
+  ["Black Panther", "black-panther.png"],
+  ["Avengers: Infinity War", "avengers-infinity-war.png"],
+  ["Green Lantern", "green-lantern.png"],
+  ["Fantastic Four", "fantastic-four.png"],
+  ["Iron Man", "ironman.png"],
+  ["Superman", "superman.png"],
+  ["Spider-Man", "spiderman.png"],
+  ["Batman", "batman.png"],
+  ["Catwoman", "catwoman.png"],
+  ["Wonder Woman", "wonder-woman.png"]
+].each do |movie_title, file_name|
+  movie = Movie.find_by!(title: movie_title)
+  file = File.open(Rails.root.join("app/assets/images/#{file_name}"))
+  movie.main_image.attach(io: file, filename: file_name)
+end
+
+admin_counter = 0
+
+20.times do
+  name = Faker::Name.first_name
+  email = name.downcase + "@example.com"
+  admin = [true, false].sample(1)[0]
+  if admin
+    admin_counter += 1
+  end
+  if admin_counter >= 5
+    admin = false
+  end
+  User.create(
+    name: name,
+    email: email,
+    password:"secretpassword",
+    password_confirmation:"secretpassword",
+    username:name.downcase,
+    admin: admin
+  )
+end
