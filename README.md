@@ -33,7 +33,7 @@ The project is created with/makes use of:
 ## Setup
 To run this project - locally - on your machine:
 ```
-$ cd your-folder/eventz
+$ cd your-folder/flix
 $ bundle install
 $ yarn install
 $ rails db:create
