@@ -12,7 +12,7 @@
 * [On production](#on-production)
 ***
 ## General info
-### Eventz
+### Flix
 A website that allows its users to review and favorite movies.
 This app is the result of a [PragmaticStudio](https://pragmaticstudio.com/) course called [Ruby on Rails 7](https://pragmaticstudio.com/rails).
 ***
